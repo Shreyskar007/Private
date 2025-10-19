@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Alex",
     "score": 5,
-    "color": "#1A202C",
+    "color": "#4f46e5",
     "scoreHistory": [
       { "score": 0, "date": "2024-07-01T10:00:00Z" },
       { "score": 2, "date": "2024-07-05T10:00:00Z" },
@@ -14,7 +14,7 @@
     "id": 2,
     "name": "Beth",
     "score": 8,
-    "color": "#2D3748",
+    "color": "#7c3aed",
     "scoreHistory": [
       { "score": 0, "date": "2024-07-01T10:00:00Z" },
       { "score": 4, "date": "2024-07-06T10:00:00Z" },
@@ -25,7 +25,7 @@
     "id": 3,
     "name": "Chris",
     "score": 3,
-    "color": "#4C3750",
+    "color": "#a855f7",
     "scoreHistory": [
       { "score": 0, "date": "2024-07-01T10:00:00Z" },
       { "score": 1, "date": "2024-07-03T10:00:00Z" },
