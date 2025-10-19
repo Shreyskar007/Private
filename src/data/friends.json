@@ -4,6 +4,7 @@
     "name": "Alex",
     "score": 5,
     "color": "hsl(var(--chart-1))",
+    "photoUrl": "https://picsum.photos/seed/1/200/200",
     "scoreHistory": [
       { "score": 0, "date": "2024-07-01T10:00:00Z" },
       { "score": 2, "date": "2024-07-05T10:00:00Z" },
@@ -15,6 +16,7 @@
     "name": "Beth",
     "score": 8,
     "color": "hsl(var(--chart-2))",
+    "photoUrl": "https://picsum.photos/seed/2/200/200",
     "scoreHistory": [
       { "score": 0, "date": "2024-07-01T10:00:00Z" },
       { "score": 4, "date": "2024-07-06T10:00:00Z" },
@@ -26,6 +28,7 @@
     "name": "Chris",
     "score": 3,
     "color": "hsl(var(--chart-3))",
+    "photoUrl": "https://picsum.photos/seed/3/200/200",
     "scoreHistory": [
       { "score": 0, "date": "2024-07-01T10:00:00Z" },
       { "score": 1, "date": "2024-07-03T10:00:00Z" },

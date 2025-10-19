@@ -8,5 +8,6 @@ export interface Friend {
   name: string;
   score: number;
   color: string;
+  photoUrl: string;
   scoreHistory: ScoreHistory[];
 }
