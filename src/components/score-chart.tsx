@@ -9,7 +9,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from "recharts";
+import { BarChart, CartesianGrid, XAxis, YAxis, Bar, Cell } from "recharts";
 
 interface ScoreChartProps {
   friends: Friend[];
@@ -32,7 +32,7 @@ export default function ScoreChart({ friends }: ScoreChartProps) {
     const data = friends.map(friend => ({
       name: friend.name,
       score: friend.score,
-      fill: `var(--color-${friend.name})`
+      fill: friend.color,
     }));
 
     return { chartData: data, chartConfig: config };
@@ -73,7 +73,11 @@ export default function ScoreChart({ friends }: ScoreChartProps) {
               cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
             />
-            <Bar dataKey="score" radius={4} />
+            <Bar dataKey="score" radius={4}>
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.fill} />
+              ))}
+            </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
