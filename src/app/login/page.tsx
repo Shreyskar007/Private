@@ -41,8 +41,8 @@ export default function LoginPage() {
       <Card className="w-full max-w-sm">
         <form onSubmit={handleLogin}>
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Welcome to FriendScore</CardTitle>
-            <CardDescription>Please sign in to continue</CardDescription>
+            <CardTitle className="text-2xl">Welcome to ChutScore</CardTitle>
+            <CardDescription>aao Ji!</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">

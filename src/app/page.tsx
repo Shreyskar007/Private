@@ -35,10 +35,10 @@ export default function Home() {
       <header className="flex justify-between items-center text-center mb-12">
         <div className="flex-1 text-center">
             <h1 className="text-5xl font-bold font-headline tracking-tight text-primary-foreground">
-            FriendScore
+            ChutScore
             </h1>
             <p className="text-muted-foreground mt-2 text-lg">
-            Who's winning? Track your scores in real-time.
+            Kitni ki le chuke ji?
             </p>
         </div>
         <div className="absolute top-4 right-4">
