@@ -5,7 +5,7 @@
     "name": "Alex",
     "score": 6,
     "color": "hsl(var(--chart-1))",
-    "photoUrl": "https://picsum.photos/seed/1/200/200",
+    "photoUrl": "/alex.png",
     "scoreHistory": [
       {
         "score": 0,
@@ -30,7 +30,7 @@
     "name": "Beth",
     "score": 9,
     "color": "hsl(var(--chart-2))",
-    "photoUrl": "https://picsum.photos/seed/2/200/200",
+    "photoUrl": "/beth.png",
     "scoreHistory": [
       {
         "score": 0,
@@ -55,7 +55,7 @@
     "name": "Chris",
     "score": 6,
     "color": "hsl(var(--chart-3))",
-    "photoUrl": "https://picsum.photos/seed/3/200/200",
+    "photoUrl": "/chris.png",
     "scoreHistory": [
       {
         "score": 0,
