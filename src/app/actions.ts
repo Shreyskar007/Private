@@ -15,6 +15,7 @@ export async function getFriends(): Promise<Friend[]> {
   } catch (error) {
     console.error('Failed to read friends data:', error);
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      // If the file doesn't exist, create it with an empty array
       await fs.writeFile(dataFilePath, '[]', 'utf-8');
       return [];
     }
@@ -33,14 +34,18 @@ export async function incrementScore(friendId: number): Promise<Friend[]> {
       throw new Error('Friend not found.');
     }
     
+    // Create a new object for the friend to ensure we don't mutate the original
     const friendToUpdate = { ...updatedFriends[friendIndex] };
     
+    // Increment the score
     friendToUpdate.score += 1;
+    // Add a new entry to the score history
     friendToUpdate.scoreHistory.push({
       score: friendToUpdate.score,
       date: new Date().toISOString(),
     });
     
+    // Replace the old friend object with the updated one
     updatedFriends[friendIndex] = friendToUpdate;
 
     await fs.writeFile(dataFilePath, JSON.stringify(updatedFriends, null, 2));
