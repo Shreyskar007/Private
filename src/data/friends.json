@@ -1,41 +1,52 @@
-
 [
   {
     "id": 1,
     "name": "Chunni",
-    "score": 1,
+    "score": 2,
     "color": "hsl(var(--chart-1))",
     "photoUrl": "/chunni.png",
     "scoreHistory": [
       {
         "score": 1,
         "date": "2024-07-01T10:00:00Z"
+      },
+      {
+        "score": 2,
+        "date": "2025-10-19T20:06:17.201Z"
       }
     ]
   },
   {
     "id": 2,
     "name": "TunTun",
-    "score": 2,
+    "score": 3,
     "color": "hsl(var(--chart-2))",
     "photoUrl": "/tuntun.png",
     "scoreHistory": [
       {
         "score": 2,
         "date": "2024-07-01T10:00:00Z"
+      },
+      {
+        "score": 3,
+        "date": "2025-10-19T20:06:16.072Z"
       }
     ]
   },
   {
     "id": 3,
     "name": "Khaliyar",
-    "score": 9,
+    "score": 10,
     "color": "hsl(var(--chart-3))",
     "photoUrl": "/khaliyar.png",
     "scoreHistory": [
       {
         "score": 9,
         "date": "2024-07-01T10:00:00Z"
+      },
+      {
+        "score": 10,
+        "date": "2025-10-19T20:06:14.250Z"
       }
     ]
   }
