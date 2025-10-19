@@ -7,11 +7,9 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  ChartLegend,
-  ChartLegendContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import { LineChart, CartesianGrid, XAxis, YAxis, Line } from "recharts";
+import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from "recharts";
 
 interface ScoreChartProps {
   friends: Friend[];
@@ -31,36 +29,11 @@ export default function ScoreChart({ friends }: ScoreChartProps) {
       };
     });
 
-    const allDatePoints = new Set<number>();
-    friends.forEach((friend) => {
-      friend.scoreHistory.forEach((record) => {
-        allDatePoints.add(new Date(record.date).setHours(0, 0, 0, 0));
-      });
-    });
-
-    const today = new Date().setHours(0, 0, 0, 0);
-    if (!allDatePoints.has(today)) {
-        allDatePoints.add(today);
-    }
-
-    const sortedDates = Array.from(allDatePoints).sort((a, b) => a - b);
-    
-    const data = sortedDates.map((timestamp) => {
-      const date = new Date(timestamp);
-      const dataPoint: { [key: string]: string | number } = {
-        date: date.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-      };
-
-      friends.forEach((friend) => {
-        const historyUptoDate = friend.scoreHistory
-          .filter((h) => new Date(h.date).getTime() <= timestamp + 86399999) // End of the day
-          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-        
-        dataPoint[friend.name] = historyUptoDate.length > 0 ? historyUptoDate[0].score : 0;
-      });
-
-      return dataPoint;
-    });
+    const data = friends.map(friend => ({
+      name: friend.name,
+      score: friend.score,
+      fill: `var(--color-${friend.name})`
+    }));
 
     return { chartData: data, chartConfig: config };
   }, [friends]);
@@ -68,11 +41,11 @@ export default function ScoreChart({ friends }: ScoreChartProps) {
   return (
     <Card className="bg-card/50 backdrop-blur-sm border-border/20">
       <CardHeader>
-        <CardTitle>Score Over Time</CardTitle>
+        <CardTitle>Current Scores</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[250px] w-full">
-          <LineChart
+          <BarChart
             accessibilityLayer
             data={chartData}
             margin={{
@@ -84,33 +57,24 @@ export default function ScoreChart({ friends }: ScoreChartProps) {
           >
             <CartesianGrid vertical={false} strokeDasharray="3 3" className="stroke-muted-foreground/20" />
             <XAxis
-              dataKey="date"
+              dataKey="name"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
             />
             <YAxis 
+                dataKey="score"
                 tickLine={false} 
                 axisLine={false} 
                 tickMargin={8}
                 allowDecimals={false}
             />
             <ChartTooltip
-              cursor={true}
+              cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
             />
-            <ChartLegend content={<ChartLegendContent />} />
-            {friends.map((friend) => (
-              <Line
-                key={friend.id}
-                dataKey={friend.name}
-                type="monotone"
-                stroke={`var(--color-${friend.name})`}
-                strokeWidth={3}
-                dot={false}
-              />
-            ))}
-          </LineChart>
+            <Bar dataKey="score" radius={4} />
+          </BarChart>
         </ChartContainer>
       </CardContent>
     </Card>
