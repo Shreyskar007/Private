@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         router.push('/login');
       }
     } catch (error) {
-      // If sessionStorage is not available, we assume not logged in.
+      // If sessionStorage is not available (e.g., during SSR), we assume not logged in.
       if (pathname !== '/login') {
         router.push('/login');
       }
