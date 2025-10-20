@@ -9,19 +9,19 @@ import { Button } from '@/components/ui/button';
 import type { Friend } from '@/lib/types';
 
 export default function Home() {
-  const { user, logout } = useAuth();
+  const { user, logout, isLoading } = useAuth();
   const router = useRouter();
   const [initialFriends, setInitialFriends] = useState<Friend[] | null>(null);
 
   useEffect(() => {
-    if (!user) {
+    if (!isLoading && !user) {
       router.push('/login');
-    } else {
+    } else if(user) {
       getFriends().then(setInitialFriends);
     }
-  }, [user, router]);
+  }, [user, router, isLoading]);
 
-  if (!user || !initialFriends) {
+  if (isLoading || !user || !initialFriends) {
     // You can show a loading spinner here
     return (
       <main className="flex min-h-screen items-center justify-center">
@@ -34,11 +34,11 @@ export default function Home() {
     <main className="container mx-auto p-4 sm:p-8">
       <header className="flex justify-between items-center text-center mb-12">
         <div className="flex-1 text-center">
-            <h1 className="text-5xl font-bold font-headline tracking-tight text-primary-foreground">
-            FriendScore
+            <h1 className="text-5xl font-bold font-headline tracking-tight text-primary">
+            ChutScore
             </h1>
             <p className="text-muted-foreground mt-2 text-lg">
-            Who's winning? Track your scores in real-time.
+            Kitni ki le chuke ji?
             </p>
         </div>
         <div className="absolute top-4 right-4">
