@@ -29,18 +29,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const storedUser = sessionStorage.getItem('user');
       if (storedUser) {
         setUser(JSON.parse(storedUser));
-      } else if (pathname !== '/login') {
-        router.push('/login');
       }
     } catch (error) {
-      // If sessionStorage is not available (e.g., during SSR), we assume not logged in.
-      if (pathname !== '/login') {
-        router.push('/login');
-      }
+        // sessionStorage is not available, e.g. during SSR.
+        // We can safely ignore this error.
     } finally {
       setIsLoading(false);
     }
-  }, [pathname, router]);
+  }, []); // Run only once on mount
+
+  useEffect(() => {
+      // This separate effect handles redirection after the initial loading is done.
+      if (!isLoading && !user && pathname !== '/login') {
+          router.push('/login');
+      }
+  }, [isLoading, user, pathname, router]);
+
 
   const login = (username: string, password: string): boolean => {
     const foundUser = users.find(
