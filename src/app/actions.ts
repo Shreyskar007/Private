@@ -26,32 +26,22 @@ export async function getFriends(): Promise<Friend[]> {
 export async function incrementScore(friendId: number): Promise<Friend[]> {
   try {
     const friends = await getFriends();
-    let updatedFriends = [...friends];
+    const friendToUpdate = friends.find((f) => f.id === friendId);
 
-    const friendIndex = updatedFriends.findIndex((f) => f.id === friendId);
-
-    if (friendIndex === -1) {
+    if (!friendToUpdate) {
       throw new Error('Friend not found.');
     }
-    
-    // Create a new object for the friend to ensure we don't mutate the original
-    const friendToUpdate = { ...updatedFriends[friendIndex] };
-    
-    // Increment the score
+
     friendToUpdate.score += 1;
-    // Add a new entry to the score history
     friendToUpdate.scoreHistory.push({
       score: friendToUpdate.score,
       date: new Date().toISOString(),
     });
-    
-    // Replace the old friend object with the updated one
-    updatedFriends[friendIndex] = friendToUpdate;
 
-    await fs.writeFile(dataFilePath, JSON.stringify(updatedFriends, null, 2));
-    
+    await fs.writeFile(dataFilePath, JSON.stringify(friends, null, 2));
+
     revalidatePath('/');
-    return updatedFriends;
+    return friends;
   } catch (error) {
     console.error('Failed to increment score:', error);
     throw new Error('Could not update score.');
