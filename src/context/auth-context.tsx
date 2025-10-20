@@ -12,16 +12,19 @@ interface AuthContextType {
   user: User | null;
   login: (username: string, password: string) => boolean;
   logout: () => void;
+  isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
+    // This effect runs only on the client, after the component has mounted.
     try {
       const storedUser = sessionStorage.getItem('user');
       if (storedUser) {
@@ -30,7 +33,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         router.push('/login');
       }
     } catch (error) {
-      // If sessionStorage is not available, do nothing.
+      // If sessionStorage is not available, we assume not logged in.
+      if (pathname !== '/login') {
+        router.push('/login');
+      }
+    } finally {
+      setIsLoading(false);
     }
   }, [pathname, router]);
 
@@ -62,7 +70,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     router.push('/login');
   };
 
-  const value = { user, login, logout };
+  const value = { user, login, logout, isLoading };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
