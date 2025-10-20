@@ -25,21 +25,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // This effect runs only on the client, after the component has mounted.
+    // It safely tries to load the user from sessionStorage.
     try {
       const storedUser = sessionStorage.getItem('user');
       if (storedUser) {
         setUser(JSON.parse(storedUser));
       }
     } catch (error) {
-        // sessionStorage is not available, e.g. during SSR.
+        // sessionStorage might not be available (e.g., during SSR or if disabled).
         // We can safely ignore this error.
     } finally {
       setIsLoading(false);
     }
-  }, []); // Run only once on mount
+  }, []); // The empty dependency array ensures this runs only once on mount.
 
   useEffect(() => {
-      // This separate effect handles redirection after the initial loading is done.
+      // This separate effect handles redirection *after* the initial loading is complete.
+      // This prevents a server/client mismatch.
       if (!isLoading && !user && pathname !== '/login') {
           router.push('/login');
       }
