@@ -61,6 +61,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // sessionStorage not available
       }
       setUser(userData);
+      // Ensure isLoading is set to false after login
+      setIsLoading(false);
+      // Redirect to home page
+      router.push('/');
       return true;
     }
     return false;
