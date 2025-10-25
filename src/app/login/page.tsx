@@ -23,10 +23,13 @@ export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (login(username, password)) {
-      router.push("/");
+      // Add a small delay to ensure state updates before navigation
+      setTimeout(() => {
+        router.push("/");
+      }, 100);
     } else {
       toast({
         title: "Invalid Credentials",
