@@ -19,13 +19,14 @@ export default function FriendCard({ friend, onIncrement, isUpdating }: FriendCa
       style={{ backgroundColor: friend.color }}
     >
       <CardHeader className="p-0 flex items-center justify-center pt-6">
-        <div className="relative w-[200px] h-[200px]">
+        <div className="relative w-[200px] h-[200px] flex items-center justify-center">
             <Image 
                 src={friend.photoUrl} 
                 alt={`${friend.name}'s profile picture`}
                 width={200}
                 height={200}
-                style={{objectFit: 'contain', borderRadius: '0.5rem'}}
+                className="object-cover rounded-lg"
+                style={{width: '100%', height: '100%'}}
                 data-ai-hint="profile picture"
             />
         </div>
